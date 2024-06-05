@@ -17,7 +17,7 @@ jobs:
           REPO_DEPLOY_RELEASES: 'marcelo-mvn-local-webgoat'
           IMAGE_NAME: 'marcelo-ga-webgoat-image:${{ github.run_number }}'
           JF_URL: https://${{ vars.JF_URL }}/
-          JF_PROJECT: ${{ vars.JF_PROJECT }}
+          # JFROG_CLI_BUILD_PROJECT JF_PROJECT: ${{ vars.JF_PROJECT }}
           JF_BUILD_NAME: 'marcelo-webgoat-ga-build'
           JF_BUILD_NUMBER: ${{ github.run_number }}
 
@@ -53,7 +53,7 @@ jobs:
 
             - name: Run mvn package
               run: |
-                jf mvn package -DskipTests=true
+                jf mvn install -DskipTests=true
 
 
             # - name: Set up Docker Buildx
