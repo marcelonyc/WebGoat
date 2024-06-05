@@ -2,10 +2,10 @@ version: 1
 type: maven
 resolver:
     serverId: SolEng
-    snapshotRepo: marcelo-mvn-curated
-    releaseRepo: marcelo-mvn-curated
+    snapshotRepo: marcelo-mvn-remote-webgoat
+    releaseRepo: marcelo-mvn-remote-webgoat
 deployer:
     serverId: SolEng
-    snapshotRepo: marcelo-mvn-local
-    releaseRepo: marcelo-mvn-local
+    snapshotRepo: marcelo-mvn-local-webgoat
+    releaseRepo: marcelo-mvn-local-webgoat
 useWrapper: true

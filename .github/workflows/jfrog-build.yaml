@@ -46,8 +46,9 @@ jobs:
               run: |
                 # Use a curated repository for python dependencies resolution
                 jf mvnc --repo-deploy-releases=${{ env.REPO_DEPLOY_RELEASES }} \
+                --repo-deploy-snapshots=${{ env.REPO_DEPLOY_RELEASES }} \
                 --repo-resolve-releases=${{ env.REPO_RESOLVE_RELEASES }} \
-                --repo-deploy-snapshots=${{ env.REPO_RESOLVE_SNAPSHOTS }} \
+                --repo-resolve-snapshots=${{ env.REPO_RESOLVE_SNAPSHOTS }} \
                 --use-wrapper=true
 
             - name: Run mvn package
