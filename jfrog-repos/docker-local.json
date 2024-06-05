@@ -1,0 +1,6 @@
+{
+    "key": "marcelo-ga-webgoat-docker-local",
+    "rclass": "local",
+    "packageType": "docker",
+    "xrayIndex": "true"
+}

@@ -1,0 +1,6 @@
+{
+    "key": "marcelo-mvn-local-webgoat",
+    "rclass": "local",
+    "packageType": "maven",
+    "xrayIndex": "true"
+}

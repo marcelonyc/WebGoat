@@ -1,0 +1,11 @@
+version: 1
+type: maven
+resolver:
+    serverId: SolEng
+    snapshotRepo: marcelo-mvn-curated
+    releaseRepo: marcelo-mvn-curated
+deployer:
+    serverId: SolEng
+    snapshotRepo: marcelo-mvn-local
+    releaseRepo: marcelo-mvn-local
+useWrapper: true
