@@ -91,6 +91,7 @@ jobs:
                 jf rt build-collect-env 
                 jf rt build-add-dependencies .
                 jf rt build-add-dependencies --from-rt ${{ env.REPO_DEPLOY_RELEASES }}/
+                jf rt build-add-dependencies --from-rt ${{ env.REPO_RESOLVE_RELEASES }}/
                 jf rt build-add-git
                 jf rt build-publish
 
