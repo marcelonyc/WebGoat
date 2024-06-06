@@ -1,4 +1,4 @@
-name: build-publish-scan
+name: marcelo-ga-webgoat-build
 on: workflow_dispatch
     
 permissions:
