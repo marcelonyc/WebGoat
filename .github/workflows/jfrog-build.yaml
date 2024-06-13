@@ -52,7 +52,7 @@ jobs:
                 --repo-resolve-snapshots=${{ env.REPO_RESOLVE_SNAPSHOTS }} \
                 --use-wrapper=true
 
-            - name: Run mvn package
+            - name: Run mvn install
               run: |
                 jf mvn clean install -DskipTests=true
 
