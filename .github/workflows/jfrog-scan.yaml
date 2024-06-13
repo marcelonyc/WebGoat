@@ -22,8 +22,7 @@ jobs:
         # The repository scanning will be triggered periodically on the following branches.
         branch: [ "main" ]
     steps:
-      - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v4
+      - uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
         env:
           JF_URL: https://${{ vars.JF_URL }}/
