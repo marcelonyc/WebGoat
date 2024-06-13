@@ -1,4 +1,4 @@
-name: marcelo-ga-webgoat-build
+name: marcelo-webgoat-ga-build
 on: workflow_dispatch
     
 permissions:
@@ -8,13 +8,14 @@ permissions:
   contents: read
 jobs:
     build-publish-python:
+        name: marcelo-webgoat-ga-build
         runs-on: ubuntu-latest
         env:
           OIDC_PROVIDER_NAME: 'marcelo-github'
-          DOCKER_REPO: 'marcelo-ga-webgoat-docker-local'
-          REPO_RESOLVE_RELEASES: 'marcelo-mvn-remote-webgoat'
-          REPO_RESOLVE_SNAPSHOTS: 'marcelo-mvn-remote-webgoat'
-          REPO_DEPLOY_RELEASES: 'marcelo-mvn-local-webgoat'
+          DOCKER_REPO: 'marcelo-webgoat-docker-local'
+          REPO_RESOLVE_RELEASES: 'marcelo-webgoat-remote'
+          REPO_RESOLVE_SNAPSHOTS: 'marcelo-webgoat-remote'
+          REPO_DEPLOY_RELEASES: 'marcelo-webgoat-local'
           IMAGE_NAME: 'marcelo-ga-webgoat-image:${{ github.run_number }}'
           JF_URL: https://${{ vars.JF_URL }}/
           # JFROG_CLI_BUILD_PROJECT JF_PROJECT: ${{ vars.JF_PROJECT }}
@@ -53,7 +54,7 @@ jobs:
 
             - name: Run mvn package
               run: |
-                jf mvn install -DskipTests=true
+                jf mvn clean install -DskipTests=true
 
 
             # - name: Set up Docker Buildx
@@ -94,6 +95,10 @@ jobs:
                 jf rt build-add-dependencies --from-rt ${{ env.REPO_RESOLVE_RELEASES }}/
                 jf rt build-add-git
                 jf rt build-publish
+
+            - name: scan
+              run: |            
+                jf scan                
 
             - name: build scan
               run: |            
