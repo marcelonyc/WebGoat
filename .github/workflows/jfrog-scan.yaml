@@ -14,12 +14,34 @@ jobs:
     name: Scan Repository (${{ matrix.branch }} branch)
     env:
       OIDC_PROVIDER_NAME: 'marcelo-github'
+      REPO_RESOLVE_RELEASES: 'marcelo-webgoat-remote'
+      REPO_RESOLVE_SNAPSHOTS: 'marcelo-webgoat-remote'
+      REPO_DEPLOY_RELEASES: 'marcelo-webgoat-local'      
     strategy:
       matrix:
         # The repository scanning will be triggered periodically on the following branches.
         branch: [ "main" ]
     steps:
-      - uses: jfrog/frogbot@v2
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        id: setup-cli
+        env:
+          JF_URL: https://${{ vars.JF_URL }}/
+          JF_PROJECT: ${{ vars.JF_PROJECT }}
+        with:
+            oidc-provider-name: ${{ env.OIDC_PROVIDER_NAME }}   
+
+      - name: configure jfrog environment
+        run: |
+          # Use a curated repository for python dependencies resolution
+          jf mvnc --global --repo-deploy-releases=${{ env.REPO_DEPLOY_RELEASES }} \
+          --repo-deploy-snapshots=${{ env.REPO_DEPLOY_RELEASES }} \
+          --repo-resolve-releases=${{ env.REPO_RESOLVE_RELEASES }} \
+          --repo-resolve-snapshots=${{ env.REPO_RESOLVE_SNAPSHOTS }} \
+          --use-wrapper=true         
+
+      - name: Frogbot
+        uses: jfrog/frogbot@v2
         env:
           JFROG_CLI_LOG_LEVEL: "DEBUG"
           # [Mandatory]
