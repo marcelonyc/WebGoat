@@ -25,11 +25,8 @@ jobs:
       - uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
         env:
-          JF_URL: https://${{ vars.JF_URL }}/
-          JF_PROJECT: ${{ vars.JF_PROJECT }}
-        with:
-            oidc-provider-name: ${{ env.OIDC_PROVIDER_NAME }}   
-
+          JF_ACCESS_TOKEN: ${{ secrets.JF_TOKEN }}
+        
       - name: configure jfrog environment
         run: |
           # Use a curated repository for python dependencies resolution
