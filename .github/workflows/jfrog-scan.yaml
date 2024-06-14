@@ -27,7 +27,14 @@ jobs:
         env:
           JF_URL: https://${{ vars.JF_URL }}/
           JF_ACCESS_TOKEN: ${{ secrets.JF_TOKEN }}
-        
+      
+      - name: Set up JDK 11 for x64
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          architecture: x64        
+      
       - name: configure jfrog environment
         run: |
           # Use a curated repository for python dependencies resolution
