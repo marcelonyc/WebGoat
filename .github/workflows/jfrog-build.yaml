@@ -67,6 +67,11 @@ jobs:
                 username: ${{ steps.setup-cli.outputs.oidc-user }}
                 password: ${{ steps.setup-cli.outputs.oidc-token }}
 
+            - name: Where am I 
+              run: |
+                echo "I am here"
+                pwd
+                ls -lra
 
             - name: Build Docker image
               uses: docker/build-push-action@v5
