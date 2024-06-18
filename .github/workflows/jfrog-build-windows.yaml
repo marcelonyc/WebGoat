@@ -1,4 +1,4 @@
-name: marcelo-webgoat-ga-build
+name: marcelo-webgoat-ga-build-windows
 on: workflow_dispatch
     
 permissions:
