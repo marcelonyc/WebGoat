@@ -10,7 +10,7 @@ permissions:
   security-events: write
 jobs:
   scan-repository:
-    runs-on: self-hosted
+    runs-on: Linux
     name: Scan Repository (${{ matrix.branch }} branch)
     env:
       OIDC_PROVIDER_NAME: 'marcelo-github'

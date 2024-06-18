@@ -9,7 +9,7 @@ permissions:
 jobs:
     build-publish-python:
         name: marcelo-webgoat-ga-build
-        runs-on: self-hosted
+        runs-on: Linux
         env:
           OIDC_PROVIDER_NAME: 'marcelo-github'
           DOCKER_REPO: 'marcelo-webgoat-docker-local'
