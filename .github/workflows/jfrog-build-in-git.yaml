@@ -7,8 +7,8 @@ permissions:
   packages: write # for uploading attestations.
   contents: read
 jobs:
-    build-publish-python:
-        name: marcelo-webgoat-ga-build
+    build-publish-webgoat-git:
+        name: marcelo-webgoat-ga-build-in-git
         runs-on: ubuntu-latest
         env:
           OIDC_PROVIDER_NAME: 'marcelo-github'
