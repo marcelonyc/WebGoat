@@ -10,18 +10,32 @@ jobs:
     mvn-presence:
         name: mvn-presence
         runs-on: ubuntu-latest
+        env:
+          OIDC_PROVIDER_NAME: 'marcelo-github'
+          JF_URL: https://${{ vars.JF_URL }}/
+          # JFROG_CLI_BUILD_PROJECT JF_PROJECT: ${{ vars.JF_PROJECT }}
+          JF_BUILD_NAME: 'marcelo-webgoat-ga-build'
+          JF_BUILD_NUMBER: ${{ github.run_number }}
 
         steps:
-              
-            - name: Set up JDK 21
-              uses: actions/setup-java@v4.2.1
-              with:
-                distribution: 'temurin'
-                java-version: 21
-                architecture: x64
+          - name: Setup JFrog CLI
+            uses: jfrog/setup-jfrog-cli@v4
+            id: setup-cli
+            env:
+              JF_URL: https://${{ vars.JF_URL }}/
+              JF_PROJECT: ${{ vars.JF_PROJECT }}
+            with:
+                oidc-provider-name: ${{ env.OIDC_PROVIDER_NAME }}            
 
-            - name: IS mvn There?
-              run: |
-                mvn -v
+          - name: Set up JDK 21
+            uses: actions/setup-java@v4.2.1
+            with:
+              distribution: 'temurin'
+              java-version: 21
+              architecture: x64
+
+          - name: IS mvn There?
+            run: |
+              jf mvn -v
 
           
