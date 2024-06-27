@@ -12,6 +12,9 @@ jobs:
         runs-on: ubuntu-latest
         env:
           OIDC_PROVIDER_NAME: 'marcelo-github'
+          REPO_RESOLVE_RELEASES: 'marcelo-webgoat-remote'
+          REPO_RESOLVE_SNAPSHOTS: 'marcelo-webgoat-remote'
+          REPO_DEPLOY_RELEASES: 'marcelo-webgoat-local'          
           JF_URL: https://${{ vars.JF_URL }}/
           # JFROG_CLI_BUILD_PROJECT JF_PROJECT: ${{ vars.JF_PROJECT }}
           JF_BUILD_NAME: 'marcelo-webgoat-ga-build'
@@ -34,6 +37,15 @@ jobs:
               java-version: 21
               architecture: x64
 
+          - name: configure jfrog environment
+            run: |
+              # Use a curated repository for python dependencies resolution
+              jf mvnc --repo-deploy-releases=${{ env.REPO_DEPLOY_RELEASES }} \
+              --repo-deploy-snapshots=${{ env.REPO_DEPLOY_RELEASES }} \
+              --repo-resolve-releases=${{ env.REPO_RESOLVE_RELEASES }} \
+              --repo-resolve-snapshots=${{ env.REPO_RESOLVE_SNAPSHOTS }} \
+              --use-wrapper=true
+              
           - name: IS mvn There?
             run: |
               jf mvn -v
