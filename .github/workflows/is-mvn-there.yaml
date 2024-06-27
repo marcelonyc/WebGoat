@@ -1,0 +1,27 @@
+name: mvn-presence
+on: workflow_dispatch
+    
+permissions:
+  actions: read # for detecting the Github Actions environment.
+  id-token: write # for creating OIDC tokens for signing.
+  packages: write # for uploading attestations.
+  contents: read
+jobs:
+    mvn-presence:
+        name: mvn-presence
+        runs-on: ubuntu-latest
+
+        steps:
+              
+            - name: Set up JDK 21
+              uses: actions/setup-java@v4.2.1
+              with:
+                distribution: 'temurin'
+                java-version: 21
+                architecture: x64
+
+            - name: IS mvn There?
+              run: |
+                mvn -v
+
+          
