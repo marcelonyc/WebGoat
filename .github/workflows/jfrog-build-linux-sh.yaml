@@ -16,12 +16,12 @@ jobs:
         env:
           OIDC_PROVIDER_NAME: ${{ vars.OIDC_PROVIDER_NAME }}
           DOCKER_REPO: ${{ vars.DOCKER_REPO }}
+          DOCKER_REMOTE: ${{ vars.DOCKER_REMOTE }}
           REPO_RESOLVE_RELEASES: ${{ vars.REPO_RESOLVE_RELEASES }}
           REPO_RESOLVE_SNAPSHOTS: ${{ vars.REPO_RESOLVE_SNAPSHOTS }}
           REPO_DEPLOY_RELEASES: ${{ vars.REPO_DEPLOY_RELEASES }}
           IMAGE_NAME: '${{ vars.IMAGE_NAME }}:${{ github.run_number }}'
           JF_URL: https://${{ vars.JF_URL }}/
-          # JFROG_CLI_BUILD_PROJECT JF_PROJECT: ${{ vars.JF_PROJECT }}
           JF_BUILD_NAME: ${{ vars.JF_BUILD_NAME }}
           JF_BUILD_NUMBER: ${{ github.run_number }}
 
@@ -59,7 +59,6 @@ jobs:
               run: |
                 jf mvn clean install -DskipTests=true
 
-
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
 
@@ -68,21 +67,18 @@ jobs:
               with:
                 registry: ${{ vars.JF_URL }}
                 username: ${{ steps.setup-cli.outputs.oidc-user }}
-                password: ${{ steps.setup-cli.outputs.oidc-token }}
-
-            - name: Where am I 
-              run: |
-                echo "I am here"
-                pwd
-                ls -lra
-
+                password: ${{ steps.setup-cli.outputs.oidc-token }}              
+            
             - name: Build Docker image
               uses: docker/build-push-action@v5
               id: build
               with:
+                build-args: |
+                  JF_URL=${{ vars.JF_URL }}
+                  DOCKER_REMOTE=${{ env.DOCKER_REMOTE }}
                 push: true
                 context: .
-                platforms: linux/amd64, linux/arm64
+                platforms: linux/amd64, linux/arm64       
                 tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
                 provenance: false
 

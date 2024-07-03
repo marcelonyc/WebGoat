@@ -1,4 +1,6 @@
-FROM docker.io/eclipse-temurin:21.0.1_12-jre
+ARG DOCKER_REMOTE
+ARG JF_URL
+FROM ${JF_URL}/${DOCKER_REMOTE}/eclipse-temurin:21.0.1_12-jre
 LABEL NAME = "WebGoat: A deliberately insecure Web Application"
 LABEL maintainer = "WebGoat team"
 
@@ -18,18 +20,18 @@ ENV TZ=Europe/Amsterdam
 
 WORKDIR /home/webgoat
 ENTRYPOINT [ "java", \
-   "-Duser.home=/home/webgoat", \
-   "-Dfile.encoding=UTF-8", \
-   "--add-opens", "java.base/java.lang=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.util=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.text=ALL-UNNAMED", \
-   "--add-opens", "java.desktop/java.beans=ALL-UNNAMED", \
-   "--add-opens", "java.desktop/java.awt.font=ALL-UNNAMED", \
-   "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.io=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.util=ALL-UNNAMED", \
-   "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", \
-   "--add-opens", "java.base/java.io=ALL-UNNAMED", \
-   "-Drunning.in.docker=true", \
-   "-jar", "webgoat.jar", "--server.address", "0.0.0.0" ]
+  "-Duser.home=/home/webgoat", \
+  "-Dfile.encoding=UTF-8", \
+  "--add-opens", "java.base/java.lang=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.util=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.text=ALL-UNNAMED", \
+  "--add-opens", "java.desktop/java.beans=ALL-UNNAMED", \
+  "--add-opens", "java.desktop/java.awt.font=ALL-UNNAMED", \
+  "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.io=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.util=ALL-UNNAMED", \
+  "--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", \
+  "--add-opens", "java.base/java.io=ALL-UNNAMED", \
+  "-Drunning.in.docker=true", \
+  "-jar", "webgoat.jar", "--server.address", "0.0.0.0" ]
