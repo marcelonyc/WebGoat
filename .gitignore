@@ -55,5 +55,6 @@ webgoat.script
 TestClass.class
 **/*.flattened-pom.xml
 /.gitconfig
-
+.jfrog/
 webgoat.gitconfig
+.github/workflows/c-action.yaml
