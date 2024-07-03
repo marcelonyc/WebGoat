@@ -15,7 +15,7 @@ Change the `runs-on` setting to a runner of your choice. These workflows are set
     - REPO_RESOLVE_RELEASES: Remote Maven repository
     - REPO_RESOLVE_SNAPSHOTS: Same as REPO_RESOLVE_RELEASES
     - DOCKER_REMOTE: Remote Docker repository
-    
+
 3. Define the OIDC integration
 
 Notes 
@@ -29,6 +29,7 @@ Notes
 
 - OIDC_PROVIDER_NAME: As defined in step 3 above
 - DOCKER_REPO: As defined in step 2 above (dev repo only)
+- DOCKER_REMOTE: As defined in step 2 above 
 - REPO_DEPLOY_RELEASES: As defined in step 2 above (dev repo only)
 - REPO_RESOLVE_RELEASES: As defined in step 2 above (dev repo only)
 - REPO_RESOLVE_SNAPSHOTS: As defined in step 2 above (dev repo only)
