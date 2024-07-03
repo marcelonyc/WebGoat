@@ -1,6 +1,6 @@
 # Prepare your environment to run this actions
 
-# Runners
+## Runners
 Change the `runs-on` setting to a runner of your choice. These workflows are set to run on self-hosted runners.
 
 ## JFrog setup
@@ -24,7 +24,7 @@ Notes
     Include a pattern to match your build name Select bbuil By Pattern: `<build name>/**`    
 
 
-# Github Settings
+## Github Settings
 ### Add this variables to the repository
 
 - OIDC_PROVIDER_NAME: As defined in step 3 above
