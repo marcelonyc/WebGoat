@@ -1,7 +1,9 @@
 # Prepare your environment to run this actions
 
+These details apply to the `jfrog-build-linux-sh.yaml` action
+
 ## Runners
-Change the `runs-on` setting to a runner of your choice. These workflows are set to run on self-hosted runners.
+Change the `runs-on` setting to a runner of your choice. This workflow is set to run on self-hosted runners.
 
 ## JFrog setup
 1. Create a project 
@@ -21,7 +23,10 @@ Change the `runs-on` setting to a runner of your choice. These workflows are set
 Notes 
 - Enable Xray scanning on each repo
 - Under Xray Settings -> Indexed Resources -> Builds
-    Include a pattern to match your build name Select bbuil By Pattern: `<build name>/**`    
+    Include a pattern to match your build name Select bbuil By Pattern: `<build name>/**` 
+    
+    The build name is hardcoded in the action yaml   
+        `name: webgoat-build-linux`
 
 
 ## Github Settings
