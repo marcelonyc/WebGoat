@@ -594,6 +594,9 @@
             <includes>
               <include>**/*.md</include>
             </includes>
+            <excludes>
+              <exclude>**/README_JFROG.md</exclude>
+            </excludes>
             <flexmark></flexmark>
           </markdown>
           <java>
