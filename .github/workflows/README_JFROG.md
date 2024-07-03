@@ -19,6 +19,8 @@ Change the `runs-on` setting to a runner of your choice. This workflow is set to
     - DOCKER_REMOTE: Remote Docker repository
 
 3. Define the OIDC integration
+    For an example of this integration, check this repo: https://github.com/marcelonyc/ga-jfrog-primer
+
 
 Notes 
 - Enable Xray scanning on each repo
