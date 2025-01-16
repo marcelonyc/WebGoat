@@ -10,7 +10,7 @@ permissions:
   security-events: write
 jobs:
   scan-repository:
-    runs-on: Linux
+    runs-on: webgoat-mac
     name: Scan Repository (${{ matrix.branch }} branch)
     env:
       OIDC_PROVIDER_NAME: 'marcelo-github'
