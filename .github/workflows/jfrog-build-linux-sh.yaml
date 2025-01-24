@@ -28,7 +28,7 @@ jobs:
         steps:
             # Use the specific setup-cli branch
             - name: Setup JFrog CLI
-              uses: jfrog/setup-jfrog-cli@v4
+              uses: jfrog/setup-jfrog-cli@v4.5.6
               id: setup-cli
               env:
                 JF_URL: https://${{ vars.JF_URL }}/
@@ -39,12 +39,12 @@ jobs:
             - name: Checkout the repository
               uses: actions/checkout@v4
               
-            - name: Set up JDK 21
-              uses: actions/setup-java@v4.2.1
-              with:
-                distribution: 'temurin'
-                java-version: 21
-                architecture: x64
+            # - name: Set up JDK 21
+            #   uses: actions/setup-java@v4.2.1
+            #   with:
+            #     distribution: 'temurin'
+            #     java-version: 21
+            #     architecture: x64
 
             - name: configure jfrog environment
               run: |
