@@ -12,7 +12,7 @@ permissions:
 jobs:
     build-publish-maven:
         name: ${{ vars.JF_BUILD_NAME }}
-        runs-on: Linux
+        runs-on: webgoat-mac
         env:
           OIDC_PROVIDER_NAME: ${{ vars.OIDC_PROVIDER_NAME }}
           DOCKER_REPO: ${{ vars.DOCKER_REPO }}
