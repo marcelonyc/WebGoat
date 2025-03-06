@@ -76,21 +76,28 @@ jobs:
                 build-args: |
                   JF_URL=${{ vars.JF_URL }}
                   DOCKER_REMOTE=${{ env.DOCKER_REMOTE }}
-                push: true
+                push: false
                 context: .
-                platforms: linux/amd64, linux/arm64       
-                tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+                outputs: type=docker
+                # platforms: linux/amd64, linux/arm64       
+                # tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
                 provenance: false
 
-            - name: docker scan
+            - name: docker push
               run: |  
-                 jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-                 jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}                   
+                 jf docker tag ${{ steps.build.outputs.imageid }} ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+                 jf docker push ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+                 # jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}   
+                 
+            # - name: docker scan
+            #   run: |  
+            #      jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+            #      jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}                   
 
-            - name: add docker package to build
-              run: |  
-                 echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
-                 jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
+            # - name: add docker package to build
+            #   run: |  
+            #      echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
+            #      jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
 
             - name: publish build info
               run: |
