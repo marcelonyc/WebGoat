@@ -42,9 +42,9 @@ jobs:
             - name: Set up JDK 21
               uses: actions/setup-java@v4.2.1
               with:
-                distribution: 'temurin'
+                distribution: 'microsoft'
                 java-version: 21
-                architecture: x64
+                # architecture: armv7
 
             - name: configure jfrog environment
               run: |
