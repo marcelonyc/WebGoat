@@ -24,8 +24,6 @@ jobs:
           JF_URL: https://${{ vars.JF_URL }}/
           JF_BUILD_NAME: ${{ vars.JF_BUILD_NAME }}
           JF_BUILD_NUMBER: ${{ github.run_number }}
-        outputs:
-          JF_TOKEN: ${{ steps.setup-cli.outputs.oidc-token }}
 
         steps:
             # Use the specific setup-cli branch
@@ -99,7 +97,7 @@ jobs:
                 
     deply-to-dev-env:
             name: webgoat-release-bundle
-            runs-on: Linux
+            runs-on: webgoat-mac
             needs: [ build-publish-maven ]
             steps:
                 # Use the specific setup-cli branch
@@ -117,7 +115,7 @@ jobs:
                     curl --location https://${{ vars.JF_URL }}/lifecycle/api/v2/release_bundle?project=${{ vars.JF_PROJECT }} \
                     -X POST \
                     --header "X-JFrog-Signing-Key-Name: ${{ vars.SIGNATURE_KEY_NAME }}" \
-                    --header "Authorization: Bearer ${{ needs.build-publish-maven.outputs.JF_TOKEN }}" \
+                    --header "Authorization: Bearer ${{ steps.setup-cli.outputs.oidc-token }}" \
                     --header "Content-Type: application/json" \
                     --data '{
                         "release_bundle_name": "DVR-Release-Bundle",
